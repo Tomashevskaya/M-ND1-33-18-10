@@ -17,9 +17,9 @@ namespace Player
 
         public Song[] Songs { get; set; }   
         
-        public void Add(Song song)
+        public void Add(params Song[] songs)
         {
-            Songs = new Song[] { song };
+            Songs = songs;
         }
 
         public void Add(Playlist playlist)
@@ -53,10 +53,14 @@ namespace Player
 
             if (Playing)
             {
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 5; i++)
                 {
-                    Console.WriteLine(PlayingSong.Lyrics);
-                    Console.WriteLine();
+                    foreach (var song in Songs)
+                    {
+                        PlayingSong = song;
+                        Console.WriteLine(PlayingSong.Lyrics);
+                        Console.WriteLine();
+                    }
                 }
             }
 

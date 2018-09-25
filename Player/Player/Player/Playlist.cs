@@ -12,7 +12,7 @@ namespace Player
 
         public void Add(params Song[] songs)
         {
-
+            Songs = songs;
         }
     }
 }
