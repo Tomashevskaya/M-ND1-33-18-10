@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Lessons/Advanced. Lesson 3/Materials/Advanced. Lesson 3
+/Player/Player/.vs/Player/v15/Server/sqlite3
+/Player/Player/.vs/Player/v15
+/Player/Player/Player/bin/Debug
+/Player/Player/Player/obj/Debug
