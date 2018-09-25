@@ -8,38 +8,81 @@ namespace Player
 {
     public class PlayerInstance
     {
-        public static Song[] Songs { get; set; }   
+
+        public bool Locked { get; set; }
+
+        public bool Playing { get; set; }
+
+        public Song PlayingSong { get; set; }
+
+        public Song[] Songs { get; set; }   
         
         public void Add(Song song)
         {
-
+            Songs = new Song[] { song };
         }
 
         public void Add(Playlist playlist)
         {
-
+            Songs = playlist.Songs;
         }
 
         public void Add(Album album)
         {
-
+            Songs = album.Songs;
         }
 
         public void Add(Artist artist)
         {
-
+            Songs = artist.Songs;
         }
 
         public bool Play(out Song playingSong)
         {
-            playingSong = null;
-            return false;
+            if (PlayingSong == null)
+            {
+                PlayingSong = Songs[0];
+            }
+
+            playingSong = PlayingSong;
+
+            if (Locked == false)
+            {
+                Playing = true;
+            }
+
+            if (Playing)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    Console.WriteLine(PlayingSong.Lyrics);
+                    Console.WriteLine();
+                }
+            }
+
+            return Playing;
         }
 
         public bool Stop(out Song playingSong)
         {
-            playingSong = null;
-            return false;
+            playingSong = PlayingSong;
+
+            if (Locked == false)
+            {
+                Playing = false;
+            }
+
+            return Playing;
+        }
+
+        public bool Lock()
+        {
+            return Locked = true;
+        }
+
+        public bool Unlock()
+        {
+            return Locked = false;
         }
     }
 }
