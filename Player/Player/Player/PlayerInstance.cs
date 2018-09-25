@@ -140,8 +140,20 @@ namespace Player
         {
             foreach (var song in Songs)
             {
-                var (title, duration, playing) = GetSongData(song);
-                Console.WriteLine($"{title} {duration.hours}:{duration.minutes}:{duration.seconds}");
+                //var (title, duration, playing) = GetSongData(song);
+
+                var songData = new
+                {
+                    Title = song.Title,
+                    Playing = song == PlayingSong,
+                    Hours = (int)(song.Duration / (60 * 60)),
+                    Minutes = (song.Duration % (60 * 60)) / 60,
+                    Seconds = (song.Duration % (60)) / 60,
+                };
+
+
+                Console.WriteLine($"{songData.Title} {songData.Hours}:{songData.Minutes}:{songData.Seconds}");
+                //Console.WriteLine($"{title} {duration.hours}:{duration.minutes}:{duration.seconds}");
             }
         }
 
