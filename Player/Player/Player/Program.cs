@@ -25,16 +25,19 @@ namespace Player
             artist.Songs = new List<Song> { songs[0], songs[2], songs[4] };
             album.Songs = new List<Song> { songs[1], songs[3], songs[4] };
 
-            var player = new Domain.Player();
+            var funnyVisualizer = new FunnyVisualizer();
+            var staticVisualizer = new StaticVisualizer();
+
+            var player = new Player(staticVisualizer);
             Song currentPlayingSong = null;
 
-            Console.WriteLine("-- Playing Songs --");
+            //Console.WriteLine("-- Playing Songs --");
             player.Add(songs);
             player.Play(out currentPlayingSong);
-            Console.WriteLine("-- Suffle Songs --");
+            //Console.WriteLine("-- Suffle Songs --");
             player.Shuffle();
             player.Play(out currentPlayingSong);
-            Console.WriteLine("-- Sort Songs --");
+            //Console.WriteLine("-- Sort Songs --");
             player.SortByTitle();
             player.Play(out currentPlayingSong);
             /*

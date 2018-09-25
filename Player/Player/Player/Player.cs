@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Player.Helpers;
+using Player.Domain;
 
-namespace Player.Domain
+namespace Player
 {
     public class Player
     {
+        public Player(Visualizer visualizer)
+        {
+            this._visualizer = visualizer;
+        }
+
+        private Visualizer _visualizer { get; set; }
 
         public bool Locked { get; set; }
 
@@ -60,10 +65,11 @@ namespace Player.Domain
                     foreach (var song in Songs)
                     {                        
                         PlayingSong = song;
+                        _visualizer.NewScreen();
                         ListSongs();
                         var(title, lyrics, _, _) = PlayingSong;
-                        Console.WriteLine(title + ": " + lyrics);
-                        Console.WriteLine();
+                        _visualizer.Render(title + ": " + lyrics);
+                        _visualizer.Render();
                     }
                 }
             }
@@ -125,7 +131,9 @@ namespace Player.Domain
                 var color = like.HasValue ? 
                     (like.Value ? ConsoleColor.Green : ConsoleColor.Red) 
                     : (ConsoleColor?)null;
-                WriteLine($"{title.Cut()} {duration.hours}:{duration.minutes}:{duration.seconds}", color);
+                var startingMark = playing ? ">>>" : "";
+                var endingMark = playing ? "<<<" : "";
+                _visualizer.Render($"{startingMark}{title.Cut()} {duration.hours}:{duration.minutes}:{duration.seconds}{endingMark}", color);
             }
         }
 
@@ -136,21 +144,6 @@ namespace Player.Domain
             var second = song.Duration - hours * 60 * 60 - minutes * 60;
 
             return (song.Title, (hours, minutes, second), song == PlayingSong, song.Like);
-        }
-
-        private void WriteLine(string text, ConsoleColor? color = null)
-        { 
-            if (color.HasValue)
-            {
-                Console.ForegroundColor = color.Value;
-                Console.WriteLine(text);
-                Console.ResetColor();
-            }
-            else
-            {
-                Console.WriteLine(text);
-            }
-            
-        }
+        }        
     }
 }
