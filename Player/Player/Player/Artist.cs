@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Player
 {
-    public class Author
+    public class Artist
     {
         public string Name { get; set; }
 

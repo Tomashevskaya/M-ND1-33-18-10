@@ -8,7 +8,7 @@
 
         public int Duration { get; set; }
 
-        public Author Author { get; set; }
+        public Artist Artist { get; set; }
 
         public Album Album { get; set; }
     }

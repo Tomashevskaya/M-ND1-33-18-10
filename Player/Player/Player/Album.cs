@@ -6,6 +6,6 @@
 
         public Song[] Songs { get; set; }
 
-        public Author Author { get; set; }
+        public Artist Artist { get; set; }
     }
 }

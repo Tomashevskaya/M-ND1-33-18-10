@@ -9,5 +9,10 @@ namespace Player
     public class Playlist
     {
         public Song[] Songs { get; set; }
+
+        public void Add(params Song[] songs)
+        {
+
+        }
     }
 }
