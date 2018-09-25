@@ -51,6 +51,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\SongsListExtension.cs" />
+    <Compile Include="Visualization\IVisualizer.cs" />
     <Compile Include="Visualization\StaticVisualizer.cs" />
     <Compile Include="Visualization\FunnyVisualizer.cs" />
     <Compile Include="Visualization\Visualizer.cs" />

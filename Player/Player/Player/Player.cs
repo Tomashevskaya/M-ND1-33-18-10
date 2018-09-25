@@ -8,12 +8,12 @@ namespace Player
 {
     public class Player
     {
-        public Player(Visualizer visualizer)
+        public Player(IVisualizer visualizer)
         {
             this._visualizer = visualizer;
         }
 
-        private Visualizer _visualizer { get; set; }
+        private IVisualizer _visualizer { get; set; }
 
         public bool Locked { get; set; }
 

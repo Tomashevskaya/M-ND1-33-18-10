@@ -2,7 +2,7 @@
 
 namespace Player
 {
-    public abstract class Visualizer
+    public abstract class Visualizer : IVisualizer
     {
         public abstract void NewScreen();
 
