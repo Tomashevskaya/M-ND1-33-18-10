@@ -93,47 +93,12 @@ namespace Player
 
         public void Shuffle()
         {
-            List<Song> suffledSongs = new List<Song>();
-            int step = 3;
-            for (int i = 0; i < step; i++)
-            {
-                int index = i;
-
-                while(index < Songs.Count)
-                {
-                    suffledSongs.Add(Songs[index]);
-                    index += step;
-                }
-            }
-
-            Songs = suffledSongs;
+            Songs = Songs.Shuffle();
         }
 
         public void SortByTitle()
         {
-            List<string> names = new List<string>();
-            List<Song> sorted = new List<Song>();
-
-            foreach (var song in Songs)
-            {
-                names.Add(song.Title);
-            }
-
-            names.Sort();
-
-            foreach (var name in names)
-            {
-                foreach (var song in Songs)
-                {
-                    if (song.Title == name)
-                    {
-                        sorted.Add(song);
-                        continue;
-                    }
-                }
-            }
-
-            Songs = sorted;
+            Songs = Songs.SortByTitle();
         }
 
         public void ListSongs()
@@ -158,7 +123,7 @@ namespace Player
                 var color = like.HasValue ? 
                     (like.Value ? ConsoleColor.Green : ConsoleColor.Red) 
                     : (ConsoleColor?)null;
-                WriteLine($"{title} {duration.hours}:{duration.minutes}:{duration.seconds}", color);
+                WriteLine($"{title.Cut()} {duration.hours}:{duration.minutes}:{duration.seconds}", color);
             }
         }
 
