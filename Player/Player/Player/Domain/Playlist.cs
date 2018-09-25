@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Player
+namespace Player.Domain
 {
     public class Playlist
     {

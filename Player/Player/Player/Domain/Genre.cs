@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Player
+namespace Player.Domain
 {
     [Flags]
     public enum Genre

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Player.Domain;
 
 namespace Player
 {
@@ -24,7 +25,7 @@ namespace Player
             artist.Songs = new List<Song> { songs[0], songs[2], songs[4] };
             album.Songs = new List<Song> { songs[1], songs[3], songs[4] };
 
-            var player = new PlayerInstance();
+            var player = new Domain.Player();
             Song currentPlayingSong = null;
 
             Console.WriteLine("-- Playing Songs --");

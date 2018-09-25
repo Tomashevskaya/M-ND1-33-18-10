@@ -1,4 +1,4 @@
-﻿namespace Player
+﻿namespace Player.Domain
 {
     public class Song
     {

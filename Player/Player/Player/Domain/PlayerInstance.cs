@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Player.Helpers;
 
-namespace Player
+namespace Player.Domain
 {
-    public class PlayerInstance
+    public class Player
     {
 
         public bool Locked { get; set; }
