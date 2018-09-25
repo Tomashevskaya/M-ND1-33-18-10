@@ -15,11 +15,11 @@ namespace Player
 
         public Song PlayingSong { get; set; }
 
-        public Song[] Songs { get; set; }   
+        public List<Song> Songs { get; set; }   
         
         public void Add(params Song[] songs)
         {
-            Songs = songs;
+            Songs = songs.ToList();
         }
 
         public void Add(Playlist playlist)
@@ -37,7 +37,7 @@ namespace Player
             Songs = artist.Songs;
         }
 
-        public bool Play(out Song playingSong)
+        public bool Play(out Song playingSong, bool loop = false)
         {
             if (PlayingSong == null)
             {
@@ -53,12 +53,13 @@ namespace Player
 
             if (Playing)
             {
-                for (int i = 0; i < 5; i++)
+                int cycles = loop ? 5 : 1;
+                for (int i = 0; i < cycles; i++)
                 {
                     foreach (var song in Songs)
                     {
                         PlayingSong = song;
-                        Console.WriteLine(PlayingSong.Lyrics);
+                        Console.WriteLine(PlayingSong.Title + ": " + PlayingSong.Lyrics);
                         Console.WriteLine();
                     }
                 }
@@ -87,6 +88,51 @@ namespace Player
         public bool Unlock()
         {
             return Locked = false;
+        }
+
+        public void Shuffle()
+        {
+            List<Song> suffledSongs = new List<Song>();
+            int step = 3;
+            for (int i = 0; i < step; i++)
+            {
+                int index = i;
+
+                while(index < Songs.Count)
+                {
+                    suffledSongs.Add(Songs[index]);
+                    index += step;
+                }
+            }
+
+            Songs = suffledSongs;
+        }
+
+        public void SortByTitle()
+        {
+            List<string> names = new List<string>();
+            List<Song> sorted = new List<Song>();
+
+            foreach (var song in Songs)
+            {
+                names.Add(song.Title);
+            }
+
+            names.Sort();
+
+            foreach (var name in names)
+            {
+                foreach (var song in Songs)
+                {
+                    if (song.Title == name)
+                    {
+                        sorted.Add(song);
+                        continue;
+                    }
+                }
+            }
+
+            Songs = sorted;
         }
     }
 }

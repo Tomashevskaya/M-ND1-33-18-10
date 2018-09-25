@@ -10,7 +10,7 @@ namespace Player
     {
         public string Name { get; set; }
 
-        public Song[] Songs { get; set; }
+        public List<Song> Songs { get; set; }
 
         public Album[] Albums { get; set; }
     }
