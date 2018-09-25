@@ -59,7 +59,8 @@ namespace Player
                     Duration = 300,
                     Lyrics = @"1. Для тебя не осталось слов и мыслей хороших...",
                     Album = album,
-                    Artist = artist
+                    Artist = artist,
+                    Genre = Genre.Blues
                 },
                 new Song()
                 {
@@ -67,7 +68,8 @@ namespace Player
                     Duration = 300,
                     Lyrics = @"2. Твои глаза... останови планету...",
                      Album = album,
-                    Artist = artist
+                    Artist = artist,
+                    Genre = Genre.Comedy
                 },
                 new Song()
                 {
@@ -75,7 +77,8 @@ namespace Player
                     Duration = 300,
                     Lyrics = @"3. А может к черту любовь... все понимаю но я опять влюбляюсь в тебя",
  Album = album,
-                    Artist = artist
+                    Artist = artist,                   
+                    Genre = Genre.Blues | Genre.Electronic
                 },
                 new Song()
                 {
@@ -90,7 +93,8 @@ namespace Player
                     Duration = 300,
                     Lyrics = @"5. Ты пишешь мне письма такие печальные...",
  Album = album,
-                    Artist = artist
+                    Artist = artist,
+                    Genre = Genre.Blues | Genre.Folk
                 }
             };
         }

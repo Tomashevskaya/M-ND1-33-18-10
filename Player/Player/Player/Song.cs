@@ -14,6 +14,8 @@
 
         public Album Album { get; set; }
 
+        public Genre Genre { get; set; }
+
         public void LikeSong()
         {
             this.Like = true;
