@@ -60,7 +60,8 @@ namespace Player
                     {                        
                         PlayingSong = song;
                         ListSongs();
-                        Console.WriteLine(PlayingSong.Title + ": " + PlayingSong.Lyrics);
+                        var(title, lyrics, _, _) = PlayingSong;
+                        Console.WriteLine(title + ": " + lyrics);
                         Console.WriteLine();
                     }
                 }

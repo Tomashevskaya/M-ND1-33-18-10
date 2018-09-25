@@ -25,5 +25,13 @@
         {
             this.Like = false;
         }
+
+        public void Deconstruct(out string title, out string lyrics, out int duration, out bool? like)
+        {
+            title = Title;
+            lyrics = Lyrics;
+            duration = Duration;
+            like = Like;
+        }
     }
 }
