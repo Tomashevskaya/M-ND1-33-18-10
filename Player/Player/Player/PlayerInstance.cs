@@ -57,8 +57,9 @@ namespace Player
                 for (int i = 0; i < cycles; i++)
                 {
                     foreach (var song in Songs)
-                    {
+                    {                        
                         PlayingSong = song;
+                        ListSongs();
                         Console.WriteLine(PlayingSong.Title + ": " + PlayingSong.Lyrics);
                         Console.WriteLine();
                     }
@@ -133,6 +134,24 @@ namespace Player
             }
 
             Songs = sorted;
+        }
+
+        public void ListSongs()
+        {
+            foreach (var song in Songs)
+            {
+                var (title, duration, playing) = GetSongData(song);
+                Console.WriteLine($"{title} {duration.hours}:{duration.minutes}:{duration.seconds}");
+            }
+        }
+
+        public (string title, (int hours, int minutes, int seconds) duration, bool playing) GetSongData(Song song)
+        {
+            var hours = (int)(song.Duration / (60 * 60));
+            var minutes = (song.Duration / 60) - hours * 60;
+            var second = song.Duration - hours * 60 * 60 - minutes * 60;
+
+            return (song.Title, (hours, minutes, second), song == PlayingSong);
         }
     }
 }
