@@ -140,9 +140,9 @@ namespace Player
         {
             foreach (var song in Songs)
             {
-                //var (title, duration, playing) = GetSongData(song);
+                //
 
-                var songData = new
+                /*var songData = new
                 {
                     Title = song.Title,
                     Playing = song == PlayingSong,
@@ -152,18 +152,38 @@ namespace Player
                 };
 
 
-                Console.WriteLine($"{songData.Title} {songData.Hours}:{songData.Minutes}:{songData.Seconds}");
-                //Console.WriteLine($"{title} {duration.hours}:{duration.minutes}:{duration.seconds}");
+                Console.WriteLine($"{songData.Title} {songData.Hours}:{songData.Minutes}:{songData.Seconds}");*/
+
+                var (title, duration, playing, like) = GetSongData(song);
+                var color = like.HasValue ? 
+                    (like.Value ? ConsoleColor.Green : ConsoleColor.Red) 
+                    : (ConsoleColor?)null;
+                WriteLine($"{title} {duration.hours}:{duration.minutes}:{duration.seconds}", color);
             }
         }
 
-        public (string title, (int hours, int minutes, int seconds) duration, bool playing) GetSongData(Song song)
+        public (string title, (int hours, int minutes, int seconds) duration, bool playing, bool? like) GetSongData(Song song)
         {
             var hours = (int)(song.Duration / (60 * 60));
             var minutes = (song.Duration / 60) - hours * 60;
             var second = song.Duration - hours * 60 * 60 - minutes * 60;
 
-            return (song.Title, (hours, minutes, second), song == PlayingSong);
+            return (song.Title, (hours, minutes, second), song == PlayingSong, song.Like);
+        }
+
+        private void WriteLine(string text, ConsoleColor? color = null)
+        { 
+            if (color.HasValue)
+            {
+                Console.ForegroundColor = color.Value;
+                Console.WriteLine(text);
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.WriteLine(text);
+            }
+            
         }
     }
 }

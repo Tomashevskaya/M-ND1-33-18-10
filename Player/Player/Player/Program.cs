@@ -15,7 +15,11 @@ namespace Player
 
             var songs = CreateSongs(artist, album);
 
-            
+            songs[0].LikeSong();
+            songs[3].LikeSong();
+            songs[2].DislikeSong();
+
+
             artist.Albums[0] = album;
             artist.Songs = new List<Song> { songs[0], songs[2], songs[4] };
             album.Songs = new List<Song> { songs[1], songs[3], songs[4] };
