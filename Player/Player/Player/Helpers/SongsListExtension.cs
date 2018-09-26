@@ -8,16 +8,6 @@ namespace Player.Helpers
 {
     public static class SongsListExtension
     {
-        public static string Cut(this string text, int symbls = 10)
-        {
-            if (text.Length > symbls - 3)
-            {
-                return text.Substring(0, symbls - 3) + "...";
-            }
-
-            return text;
-        }
-
         public static List<Song> Shuffle(this List<Song> songs)
         {
             List<Song> suffledSongs = new List<Song>();

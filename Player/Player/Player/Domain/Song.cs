@@ -1,6 +1,6 @@
 ﻿namespace Player.Domain
 {
-    public class Song
+    public class Song : IPlayItem<string>
     {
         public string Title { get; set; }
 
@@ -15,6 +15,8 @@
         public Album Album { get; set; }
 
         public Genre Genre { get; set; }
+
+        public string Content { get { return Lyrics; } set { Lyrics = value;  } }
 
         public void LikeSong()
         {

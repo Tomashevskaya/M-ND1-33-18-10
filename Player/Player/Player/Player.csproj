@@ -44,9 +44,12 @@
   <ItemGroup>
     <Compile Include="Domain\Artist.cs" />
     <Compile Include="Domain\Genre.cs" />
+    <Compile Include="Domain\ISong.cs" />
     <Compile Include="Domain\Playlist.cs" />
     <Compile Include="Domain\Album.cs" />
     <Compile Include="Domain\Song.cs" />
+    <Compile Include="Helpers\StringExtention.cs" />
+    <Compile Include="IPlayer.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

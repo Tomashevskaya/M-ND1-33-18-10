@@ -6,7 +6,7 @@ using Player.Domain;
 
 namespace Player
 {
-    public class Player
+    public class Player : IPlayer<Song, String>
     {
         public Player(IVisualizer visualizer)
         {
@@ -19,38 +19,38 @@ namespace Player
 
         public bool Playing { get; set; }
 
-        public Song PlayingSong { get; set; }
+        public Song PlayingItem { get; set; }
 
-        public List<Song> Songs { get; set; }   
+        public List<Song> Items { get; set; }   
         
-        public void Add(params Song[] songs)
+        public void Add(params Song[] items)
         {
-            Songs = songs.ToList();
+            Items = items.ToList();
         }
 
         public void Add(Playlist playlist)
         {
-            Songs = playlist.Songs;
+            Items = playlist.Songs;
         }
 
         public void Add(Album album)
         {
-            Songs = album.Songs;
+            Items = album.Songs;
         }
 
         public void Add(Artist artist)
         {
-            Songs = artist.Songs;
+            Items = artist.Songs;
         }
 
-        public bool Play(out Song playingSong, bool loop = false)
+        public bool Play(out Song playingItem, bool loop = false)
         {
-            if (PlayingSong == null)
+            if (PlayingItem == null)
             {
-                PlayingSong = Songs[0];
+                PlayingItem = Items[0];
             }
 
-            playingSong = PlayingSong;
+            playingItem = PlayingItem;
 
             if (Locked == false)
             {
@@ -62,12 +62,12 @@ namespace Player
                 int cycles = loop ? 5 : 1;
                 for (int i = 0; i < cycles; i++)
                 {
-                    foreach (var song in Songs)
+                    foreach (var song in Items)
                     {                        
-                        PlayingSong = song;
+                        PlayingItem = song;
                         _visualizer.NewScreen();
-                        ListSongs();
-                        var(title, lyrics, _, _) = PlayingSong;
+                        ListItems();
+                        var(title, lyrics, _, _) = PlayingItem;
                         _visualizer.Render(title + ": " + lyrics);
                         _visualizer.Render();
                     }
@@ -79,7 +79,7 @@ namespace Player
 
         public bool Stop(out Song playingSong)
         {
-            playingSong = PlayingSong;
+            playingSong = PlayingItem;
 
             if (Locked == false)
             {
@@ -101,17 +101,17 @@ namespace Player
 
         public void Shuffle()
         {
-            Songs = Songs.Shuffle();
+            Items = Items.Shuffle();
         }
 
         public void SortByTitle()
         {
-            Songs = Songs.SortByTitle();
+            Items = Items.SortByTitle();
         }
 
-        public void ListSongs()
+        public void ListItems()
         {
-            foreach (var song in Songs)
+            foreach (var song in Items)
             {
                 //
 
@@ -127,23 +127,24 @@ namespace Player
 
                 Console.WriteLine($"{songData.Title} {songData.Hours}:{songData.Minutes}:{songData.Seconds}");*/
 
-                var (title, duration, playing, like) = GetSongData(song);
+                var (title, duration, playing, like) = GetItemData(song);
                 var color = like.HasValue ? 
                     (like.Value ? ConsoleColor.Green : ConsoleColor.Red) 
                     : (ConsoleColor?)null;
                 var startingMark = playing ? ">>>" : "";
                 var endingMark = playing ? "<<<" : "";
-                _visualizer.Render($"{startingMark}{title.Cut()} {duration.hours}:{duration.minutes}:{duration.seconds}{endingMark}", color);
+                title = playing ? title.Fence() : title;
+                _visualizer.Render($"{startingMark}{title} {duration.hours}:{duration.minutes}:{duration.seconds}{endingMark}", color);
             }
         }
 
-        public (string title, (int hours, int minutes, int seconds) duration, bool playing, bool? like) GetSongData(Song song)
+        public (string title, (int hours, int minutes, int seconds) duration, bool playing, bool? like) GetItemData(Song song)
         {
             var hours = (int)(song.Duration / (60 * 60));
             var minutes = (song.Duration / 60) - hours * 60;
             var second = song.Duration - hours * 60 * 60 - minutes * 60;
 
-            return (song.Title, (hours, minutes, second), song == PlayingSong, song.Like);
+            return (song.Title, (hours, minutes, second), song == PlayingItem, song.Like);
         }        
     }
 }
