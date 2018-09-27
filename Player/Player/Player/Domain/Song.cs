@@ -1,8 +1,18 @@
-﻿namespace Player.Domain
+﻿using System.IO;
+
+namespace Player.Domain
 {
     public class Song : IPlayItem<string>
     {
+        public Song(FileInfo file)
+        {
+            this.Title = file.Name;
+            this.Path = file.FullName;
+        }
+
         public string Title { get; set; }
+
+        public string Path { get; set; }
 
         public string Lyrics { get; set; }
 
@@ -28,12 +38,13 @@
             this.Like = false;
         }
 
-        public void Deconstruct(out string title, out string lyrics, out int duration, out bool? like)
+        public void Deconstruct(out string title, out string lyrics, out string path, out int duration, out bool? like)
         {
             title = Title;
             lyrics = Lyrics;
             duration = Duration;
             like = Like;
+            path = Path;
         }
     }
 }

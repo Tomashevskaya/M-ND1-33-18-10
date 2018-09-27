@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,9 @@ namespace Player
             var artist = new Artist() { Name = "Loboda", Albums = new Album[1] };
             var album = new Album() { Artist = artist, Title = "Superstar" };
 
-            var songs = CreateSongs(artist, album);
+            //var directory = @"d:\Music\WAV\";
+            var directory = @"d:\Music\WAV\short";
+            var songs = CreateSongs(directory, artist, album);
 
             songs[0].LikeSong();
             songs[3].LikeSong();
@@ -32,7 +35,7 @@ namespace Player
             Song currentPlayingSong = null;
 
             //Console.WriteLine("-- Playing Songs --");
-            player.Add(songs);
+            player.Add(songs.ToArray());
             player.Play(out currentPlayingSong);
             //Console.WriteLine("-- Suffle Songs --");
             player.Shuffle();
@@ -54,53 +57,27 @@ namespace Player
         }
 
 
-        private static Song[] CreateSongs(Artist artist, Album album)
+        private static List<Song> CreateSongs(string directory, Artist artist, Album album)
         {
-            return new Song[] {
-                new Song()
+            var result = new List<Song>();
+
+            var songsPathes = Directory.GetFiles(directory);
+
+            foreach (var songPath in songsPathes)
+            {
+                var songFile = new FileInfo(songPath);
+                result.Add(new Song(songFile)
                 {
-                    Title = "Superstar",
-                    Duration = 300,
+                    Duration = 30,
                     Lyrics = @"1. Для тебя не осталось слов и мыслей хороших...",
                     Album = album,
                     Artist = artist,
                     Genre = Genre.Blues
-                },
-                new Song()
-                {
-                    Title = "Твои глаза",
-                    Duration = 300,
-                    Lyrics = @"2. Твои глаза... останови планету...",
-                     Album = album,
-                    Artist = artist,
-                    Genre = Genre.Comedy
-                },
-                new Song()
-                {
-                    Title = "К черту любовь",
-                    Duration = 300,
-                    Lyrics = @"3. А может к черту любовь... все понимаю но я опять влюбляюсь в тебя",
- Album = album,
-                    Artist = artist,                   
-                    Genre = Genre.Blues | Genre.Electronic
-                },
-                new Song()
-                {
-                    Title = "Парень",
-                    Duration = 300,
-                    Lyrics = @"4. Парень, ты меня так сильно ранил...",
- Album = album,
-                    Artist = artist
-                },
-                new Song()    {
-                    Title = "Случайная",
-                    Duration = 300,
-                    Lyrics = @"5. Ты пишешь мне письма такие печальные...",
- Album = album,
-                    Artist = artist,
-                    Genre = Genre.Blues | Genre.Folk
-                }
+                });          
+
             };
+
+            return result;
         }
     }
 }

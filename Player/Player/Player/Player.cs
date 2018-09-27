@@ -60,16 +60,41 @@ namespace Player
             if (Playing)
             {
                 int cycles = loop ? 5 : 1;
-                for (int i = 0; i < cycles; i++)
+
+                using (System.Media.SoundPlayer player = new System.Media.SoundPlayer())
                 {
-                    foreach (var song in Items)
-                    {                        
-                        PlayingItem = song;
-                        _visualizer.NewScreen();
-                        ListItems();
-                        var(title, lyrics, _, _) = PlayingItem;
-                        _visualizer.Render(title + ": " + lyrics);
-                        _visualizer.Render();
+                    for (int i = 0; i < cycles; i++)
+                    {
+                        foreach (var song in Items)
+                        {                        
+                            PlayingItem = song;
+
+                            _visualizer.NewScreen();
+
+                            ListItems();
+
+                            var(title, lyrics, path, duration, _) = PlayingItem;
+
+                            try
+                            {
+                                player.SoundLocation = path;
+                                player.PlaySync();
+
+
+                                _visualizer.Render(title + ": " + lyrics);
+                                _visualizer.Render();
+
+                                //System.Threading.Thread.Sleep(duration * 1000);
+                                //System.Threading.Thread.Sleep(5000);
+                                player.Stop();
+                            }
+                            catch (Exception)
+                            {
+                                continue;
+                            }
+                        
+                            
+                        }
                     }
                 }
             }
