@@ -10,6 +10,17 @@ namespace Basic.Lesson_4._1
     {
         static void Main(string[] args)
         {
+            /*switch (switch_on)
+            {
+                default:
+            }
+
+            if (true)
+            {
+
+            }
+
+            Console.WriteLine();*/
         }
     }
 }
