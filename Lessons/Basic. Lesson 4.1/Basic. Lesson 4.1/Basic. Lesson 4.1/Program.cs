@@ -13,16 +13,32 @@ namespace Basic.Lesson_4._1
         {
 
             //NumberAkinatorExample();
-            AlphabetExample();
-
+            //AlphabetExample();
+            //PowerWhileExample();
+            NumberAkinatorWhileExample();
 
 
             Console.ReadLine();
         }
 
-        private static void IfComparisonExample()
+        private static void PowerWhileExample()
         {
+            Console.WriteLine("Введите число");
+            var number = Convert.ToInt32(Console.ReadLine());
 
+            Console.WriteLine("Введите степень");
+            var power = Convert.ToInt32(Console.ReadLine());
+
+            var muliplier = 1;
+
+            var result = 1;
+            while (muliplier <= power)
+            {
+                result *= number;
+                muliplier++;
+            }
+
+            Console.WriteLine(result);
         }
 
         private static void AlphabetExample()
@@ -80,6 +96,45 @@ namespace Basic.Lesson_4._1
                     }
                 }
             }                
+        }
+
+        private static void NumberAkinatorWhileExample()
+        {
+                      
+            int greaterThen = 1;
+            int lessThen = 100;
+            int checkPoint = lessThen/2;
+
+            Console.WriteLine($"Загодайте число от {greaterThen} до {lessThen}.");
+            bool guessing = true;
+
+            while (guessing)
+            {
+                Console.WriteLine($"Это число равно {checkPoint}? 1 - да. 0 - нет.");
+                if (Console.ReadLine() == "1")
+                {
+                    guessing = false;
+                }
+                else
+                {
+                    var oldCheckPoint = checkPoint;
+                    Console.WriteLine($"Это число больше {checkPoint}? 1 - да. 0 - нет.");
+                    if (Console.ReadLine() == "1")
+                    {
+                        checkPoint = oldCheckPoint + (lessThen - oldCheckPoint) / 2;
+                        greaterThen = oldCheckPoint;
+                                               
+                    }                    
+                    else
+                    {
+                        checkPoint = oldCheckPoint - (lessThen - oldCheckPoint) / 2;
+                        lessThen = oldCheckPoint;
+                        
+                    }
+                }               
+            }
+
+            Console.WriteLine($"Ура! Я выйграл. Это число {checkPoint}");
         }
 
         private static void OddOrEvenExample()
