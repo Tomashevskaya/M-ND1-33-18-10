@@ -10,9 +10,10 @@ namespace Basic.Lesson_4._1
     {
         static void Main(string[] args)
         {
-            
 
-           
+            NumberAkinatorExample();
+
+
 
             Console.ReadLine();
         }
@@ -20,6 +21,54 @@ namespace Basic.Lesson_4._1
         private static void IfComparisonExample()
         {
 
+        }
+
+        private static void NumberAkinatorExample()
+        {
+            Console.WriteLine("Загодайте число от 1 до 3.");
+            
+            //int greaterThen = 1;
+            //int lessThen = 5;
+            int checkPoint = 3;
+
+
+            Console.WriteLine($"Это число равно {checkPoint}? 1 - да. 0 - нет.");
+            if (Console.ReadLine() == "1")
+            {
+                Console.WriteLine($"Ура! Я выйграл");
+            }
+            else
+            {
+                // > 3
+                Console.WriteLine($"Это число больше {checkPoint}? 1 - да. 0 - нет.");
+                if (Console.ReadLine() == "1")
+                {
+                    checkPoint++;
+                    Console.WriteLine($"Это число {checkPoint}? 1 - да. 0 - нет.");
+                    if (Console.ReadLine() == "1")
+                    {
+                        Console.WriteLine($"Ура! Я выйграл");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Это число {checkPoint++}");
+                    }
+                }
+                //< 3
+                else
+                {
+                    checkPoint--;
+                    Console.WriteLine($"Это число {checkPoint}? 1 - да. 0 - нет.");
+                    if (Console.ReadLine() == "1")
+                    {
+                        Console.WriteLine($"Ура! Я выйграл");
+                    } 
+                    else
+                    {
+                        Console.WriteLine($"Это число {checkPoint--}");
+                    }
+                }
+            }                
         }
 
         private static void OddOrEvenExample()
