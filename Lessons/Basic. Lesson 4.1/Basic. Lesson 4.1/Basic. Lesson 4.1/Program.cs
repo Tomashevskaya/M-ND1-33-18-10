@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,8 @@ namespace Basic.Lesson_4._1
         static void Main(string[] args)
         {
 
-            NumberAkinatorExample();
+            //NumberAkinatorExample();
+            AlphabetExample();
 
 
 
@@ -21,6 +23,15 @@ namespace Basic.Lesson_4._1
         private static void IfComparisonExample()
         {
 
+        }
+
+        private static void AlphabetExample()
+        {
+            //for (int i = 90; i >= 65; i--)
+            for (int i = Int32.Parse("5A", NumberStyles.HexNumber); i >= Int32.Parse("41", NumberStyles.HexNumber); i--)
+            {
+                Console.WriteLine((char)i);
+            }
         }
 
         private static void NumberAkinatorExample()
