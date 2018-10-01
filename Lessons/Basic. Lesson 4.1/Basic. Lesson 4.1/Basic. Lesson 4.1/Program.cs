@@ -184,7 +184,34 @@ namespace Basic.Lesson_4._1
                 default:
                     break;
             }
-        }       
+        }
+
+        private static void SwitchComparisonExample2()
+        {
+            int y = 2;
+            int x = 6;
+
+            int[] mas = { x, y };
+
+            switch (mas)
+            {
+                case int[] tempMas when tempMas[0] < 0 || tempMas[1] < 0:
+                    Console.WriteLine("Negatives");
+                    break;
+                case null:
+                    Console.WriteLine("Error");
+                    break;
+                case int[] tempMas when tempMas[0] == tempMas[1]:
+                    Console.WriteLine("x == y");
+                    break;
+                case int[] tempMas when tempMas[0] > tempMas[1]:
+                    Console.WriteLine("x > y" + (tempMas[0] - tempMas[1]));
+                    break;
+                case int[] tempMas when tempMas[0] < tempMas[1]:
+                    Console.WriteLine("x < y" + (tempMas[0] - tempMas[1]));
+                    break;
+            }
+        }
 
         private static void ASWDMovementExample()
         {
