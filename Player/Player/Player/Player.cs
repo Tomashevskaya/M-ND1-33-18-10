@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Player.Helpers;
 using Player.Domain;
+using Player.Exceptions;
 
 namespace Player
 {
@@ -66,40 +67,68 @@ namespace Player
                     for (int i = 0; i < cycles; i++)
                     {
                         foreach (var song in Items)
-                        {                        
-                            PlayingItem = song;
-
-                            _visualizer.NewScreen();
-
-                            ListItems();
-
-                            var(title, lyrics, path, duration, _) = PlayingItem;
-
+                        {
                             try
                             {
-                                player.SoundLocation = path;
-                                player.PlaySync();
+                                _visualizer.NewScreen();
+                                PlayingItem = song;
 
+                                ListItems();
 
-                                _visualizer.Render(title + ": " + lyrics);
-                                _visualizer.Render();
+                                PlaySong(player, song);
+                                
 
-                                //System.Threading.Thread.Sleep(duration * 1000);
-                                //System.Threading.Thread.Sleep(5000);
-                                player.Stop();
+                                
                             }
-                            catch (Exception)
+                            catch (PlayerException ex)
                             {
+                                Console.WriteLine(ex.Message);
                                 continue;
                             }
-                        
-                            
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                                throw;
+                            }
+
                         }
                     }
                 }
             }
 
             return Playing;
+        }
+
+        private void PlaySong(System.Media.SoundPlayer player, Song song)
+        {
+            if (!song.Path.EndsWith(".wav"))
+            {
+                throw new Exceptions.FileNotPlayableException($"Failed to play file '{song.Title}'") { Path = song.Path };
+            }
+
+
+            var (title, lyrics, path, duration, _) = song;
+
+            try
+            {
+                player.SoundLocation = path;
+                player.PlaySync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exceptions.FailedToPlayException($"Failed to play song '{song.Title}'", ex) { Song = song };
+            }
+
+
+            //_visualizer.Render(title + ": " + lyrics);
+            //_visualizer.Render();
+
+            //System.Threading.Thread.Sleep(duration * 1000);
+            //System.Threading.Thread.Sleep(5000);
+            player.Stop();
+
+
+
         }
 
         public bool Stop(out Song playingSong)

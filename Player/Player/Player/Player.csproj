@@ -48,6 +48,9 @@
     <Compile Include="Domain\Playlist.cs" />
     <Compile Include="Domain\Album.cs" />
     <Compile Include="Domain\Song.cs" />
+    <Compile Include="Exceptions\FailedToPlayException.cs" />
+    <Compile Include="Exceptions\FileNotPlayableException.cs" />
+    <Compile Include="Exceptions\PlayerException.cs" />
     <Compile Include="Helpers\StringExtention.cs" />
     <Compile Include="IPlayer.cs" />
     <Compile Include="Player.cs" />
