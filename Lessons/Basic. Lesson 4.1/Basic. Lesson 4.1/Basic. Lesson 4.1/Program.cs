@@ -13,14 +13,29 @@ namespace Basic.Lesson_4._1
         {
 
             //NumberAkinatorExample();
-            AlphabetExample();
+            //AlphabetExample();
             //PowerWhileExample();
             //NumberAkinatorWhileExample();
-
+            DiceGame();
             //CountLetterAExample();
 
 
             Console.ReadLine();
+        }
+
+        private static void DiceGame()
+        {
+            int steps = 25;
+            int position = 1;
+
+            while(position < steps)
+            {
+                Console.WriteLine("Бросайте кость. Введите число от 1 до 6.");
+                int step = int.Parse(Console.ReadLine());
+                position += step;
+            }
+
+            Console.WriteLine("Ура! Вы победили.");
         }
 
         private static void PowerWhileExample()
