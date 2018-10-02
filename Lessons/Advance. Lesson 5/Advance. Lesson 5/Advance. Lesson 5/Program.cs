@@ -13,6 +13,128 @@ namespace Advance.Lesson_5
             AdultException();
         }
 
+        public static async Task MakeRequestWithNotModifiedSupport()
+        {
+            var client = new System.Net.Http.HttpClient();
+            var streamTask = client.GetStringAsync("https://tut.by");
+
+            var responseText = string.Empty;
+
+            try
+            {
+                responseText = await streamTask;
+            }
+            catch (System.Net.Http.HttpRequestException e) when (e.Message.Contains("301"))
+            {
+                responseText = "Site Moved";
+            }
+            catch (System.Net.Http.HttpRequestException e) when (e.Message.Contains("304"))
+            {
+                responseText =  "Use the Cache";
+            }
+        }
+
+        public static void MultipleExceptionCatcher()
+        {
+            try
+            {                
+                int number = 25;
+                int[] deviders = new int[] { 3, 6, 0 };
+
+                for (int i = 0; i <= deviders.Length; i++)
+                {
+                    var result = number / deviders[i];
+                    Console.Write(result);
+                }               
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                Console.Write(ex.Message);
+            }
+            catch (DivideByZeroException ex)
+            {
+                Console.Write(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+            }
+        }
+
+        public static void InnerTryCatchExample()
+        {
+            try
+            {
+                int number = 25;
+                int[] deviders = new int[] { 3, 6, 0 };
+
+                for (int i = 0; i <= deviders.Length; i++)
+                {
+                    try
+                    {
+                        var result = number / deviders[i];
+                        Console.Write(result);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.Write(ex.Message);
+                    }                   
+                }
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                Console.Write(ex.Message);
+            }           
+        }
+
+        public static void ClrExceptionCatcher()
+        {
+            try
+            {
+                var zero = 0;
+                var number = 25;
+
+                var result = number / zero;
+                Console.Write(result);
+            }
+            catch (Exception ex) {
+                Console.Write(ex.Message);
+            }
+        }
+
+        public static void ExceptionFinallyExample()
+        {
+            try
+            {
+                var zero = 0;
+                var number = 25;
+
+                var result = number / zero;
+                Console.Write(result);
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+            }
+            finally
+            {
+                //do some code here. 
+            }
+        }
+
+        public static void EmptyExceptionCatcher()
+        {
+            try
+            {
+                var zero = 0;
+                var number = 25;
+
+                var result = number / zero;
+                Console.Write(result);
+            }
+            catch {}
+        }
+
         public static void AdultException()
         {
             const int adult = 18;
@@ -27,9 +149,7 @@ namespace Advance.Lesson_5
         {
             throw new System.Net.Mail.SmtpException();
         }
-
-
-
+        
         //public SmtpException();
 
         //public SmtpException(SmtpStatusCode statusCode);
