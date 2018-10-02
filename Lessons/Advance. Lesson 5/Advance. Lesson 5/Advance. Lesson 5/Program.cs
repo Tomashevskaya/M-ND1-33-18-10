@@ -13,6 +13,18 @@ namespace Advance.Lesson_5
             AdultException();
         }
 
+        public static void GenerateExceptionExample()
+        {
+            double credit1 = CreditCalculator.GetPaymentPerMonth(500, 12, 24);
+
+            double credit2 = CreditCalculator.GetPaymentPerMonth(0, 12, 24);
+
+            double credit3 = CreditCalculator.GetPaymentPerMonth(500, 0, 24);
+
+            double credit4 = CreditCalculator.GetPaymentPerMonth(500, 12, 0);
+
+        }
+
         public static async Task MakeRequestWithNotModifiedSupport()
         {
             var client = new System.Net.Http.HttpClient();
