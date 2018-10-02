@@ -13,9 +13,11 @@ namespace Basic.Lesson_4._1
         {
 
             //NumberAkinatorExample();
-            //AlphabetExample();
+            AlphabetExample();
             //PowerWhileExample();
-            NumberAkinatorWhileExample();
+            //NumberAkinatorWhileExample();
+
+            //CountLetterAExample();
 
 
             Console.ReadLine();
@@ -44,10 +46,16 @@ namespace Basic.Lesson_4._1
         private static void AlphabetExample()
         {
             //for (int i = 90; i >= 65; i--)
-            for (int i = Int32.Parse("5A", NumberStyles.HexNumber); i >= Int32.Parse("41", NumberStyles.HexNumber); i--)
+            /*for (int i = Int32.Parse("5A", NumberStyles.HexNumber); i >= Int32.Parse("41", NumberStyles.HexNumber); i--)
             {
                 Console.WriteLine((char)i);
+            }*/
+
+            for (char i = 'Z'; i >= 'A'; i--)
+            {
+                Console.Write(i + " ");
             }
+            Console.ReadLine();
         }
 
         private static void NumberAkinatorExample()
@@ -149,8 +157,10 @@ namespace Basic.Lesson_4._1
         private static void CountLetterAExample()
         {
             int aQuantity = 0;
+
             Console.WriteLine("Enter some word");
-            string str = Convert.ToString(Console.ReadLine());
+            string str = Console.ReadLine();
+
             for (int i = 0; i < str.Length; i++)
             {
                 if (str[i] == 'a')
