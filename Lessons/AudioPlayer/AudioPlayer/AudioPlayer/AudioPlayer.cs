@@ -34,7 +34,7 @@ namespace AudioPlayer
         public void VolumeDown()
         {
             //Volume--;
-            Volume = Volume--;
+            Volume = Volume-1;
         }
 
         public void VolumeChange(int step)
