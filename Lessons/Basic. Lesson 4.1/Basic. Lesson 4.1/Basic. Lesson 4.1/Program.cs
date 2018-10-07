@@ -17,6 +17,7 @@ namespace Basic.Lesson_4._1
             //PowerWhileExample();
             //NumberAkinatorWhileExample();
             DiceGame();
+            TenAfroChilden();
             //CountLetterAExample();
 
 
@@ -25,17 +26,38 @@ namespace Basic.Lesson_4._1
 
         private static void DiceGame()
         {
+            //Доступное количество ходов.
             int steps = 25;
+            //Начальной номер хода (фишка стоит на первом кружке).
             int position = 1;
 
+            //Пока игрок не дошел до конца поля мы просим его бросать кости.
             while(position < steps)
             {
                 Console.WriteLine("Бросайте кость. Введите число от 1 до 6.");
+                //Считываем количество очков, которое игрок выбросил.
                 int step = int.Parse(Console.ReadLine());
+                //Продвигаем фишку на данное количество шагов. 
                 position += step;
             }
 
             Console.WriteLine("Ура! Вы победили.");
+        }
+
+        private static void TenAfroChilden()
+        {           
+            for (int i = 10; i > 1; i--)
+            {
+                Console.WriteLine(i + " негритят пошли купаться в море,");
+                Console.WriteLine(i + " негритят резвились на просторе.");
+                Console.WriteLine("Один из них утоп, ему купили гроб,");
+                Console.WriteLine("И вот вам результат - " + (i - 1) + " негритят.");
+            }
+
+            Console.WriteLine("Один негритенок купаться не пошел,");
+            Console.WriteLine("Один негритенок жену себе нашел.");
+            Console.WriteLine("И со своей женой отправился домой,");
+            Console.WriteLine("И вот вам результат - снова десять негритят.");
         }
 
         private static void PowerWhileExample()
