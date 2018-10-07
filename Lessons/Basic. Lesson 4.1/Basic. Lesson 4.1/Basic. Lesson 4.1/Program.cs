@@ -16,13 +16,33 @@ namespace Basic.Lesson_4._1
             //AlphabetExample();
             //PowerWhileExample();
             //NumberAkinatorWhileExample();
-            DiceGame();
-            TenAfroChilden();
+            //DiceGame();
+            //TenAfroChilden();
             //CountLetterAExample();
-
+            Example2Plus2();
 
             Console.ReadLine();
         }
+
+        private static void Example2Plus2()
+        {            
+            Console.WriteLine("Решите пример, 2 + 2 =");
+            bool correct = false;
+
+            while (correct == false)
+            {
+                int result = Convert.ToInt32(Console.ReadLine());
+                correct = result == 4;
+
+                if (!correct)
+                {
+                    Console.WriteLine("Решение не верное, попробуйте еще раз!");
+                }
+            }
+
+            Console.WriteLine("Решение верное!");
+        }
+
 
         private static void DiceGame()
         {
