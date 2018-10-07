@@ -16,7 +16,8 @@ namespace Advence.Lesson_6
             //Practice1();
             //ReadFromFileWithStream();
             //WriteToFileWithStream();
-            Practice2();
+            //Practice2();
+            BufferedStreamExample();
         }        
 
         private static void SysteIOUsageExample()
@@ -81,6 +82,24 @@ namespace Advence.Lesson_6
                     }                    
                 }
             }
+        }
+
+        private static void BufferedStreamExample()
+        {
+            FileInfo file = new FileInfo(@"d:\File.txt");
+
+            using (FileStream fileStream = file.Open(FileMode.OpenOrCreate, FileAccess.ReadWrite))
+            {               
+                using (BufferedStream bs = new BufferedStream(fileStream, 10000))
+                {
+                    for (int i = 1; i < 100; i++)
+                    {
+                        var data = Encoding.Default.GetBytes($"{i}). Hello World\n");
+                        bs.Write(data, 0, data.Length);
+                    }
+                }
+            }
+
         }
 
         private static void Practice1()
