@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Xml.Serialization;
+using System.Xml;
 
 namespace Advence.Lesson_6
 {
@@ -17,8 +19,69 @@ namespace Advence.Lesson_6
             //ReadFromFileWithStream();
             //WriteToFileWithStream();
             //Practice2();
-            BufferedStreamExample();
-        }        
+            //BufferedStreamExample();
+            //SericalizationExample();
+            //XMLDocumentExample();
+            XMLReaderExample();
+            Console.ReadLine();
+        } 
+
+        private static void XMLReaderExample()
+        {
+            using (XmlReader reader = XmlReader.Create("XMLFile.xml"))
+            {
+                while (reader.Read())
+                {                    
+                    if (reader.IsStartElement())
+                    {
+                        var name = reader.Name;
+                        reader.Read();
+                        var value = reader.Value.Trim();
+                        Console.WriteLine($"{name}: {value}");
+                    }
+                }
+            }
+        }
+        
+        private static void XMLDocumentExample()
+        {
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load("XMLFile.xml");
+          
+            XmlElement arraysOfSong = xDoc.DocumentElement;
+            foreach (XmlNode song in arraysOfSong)
+            {
+                foreach (XmlNode property in song.ChildNodes)
+                {
+                    Console.WriteLine($"{property.Name}: {property.InnerText}");
+                }
+            }
+        }
+        
+        private static void SericalizationExample()
+        {
+            var arr = new Song[]
+            {
+                new Song() {
+                    Title = "Title 1",
+                    Duration = 247,
+                    Lyrics = "Lyrics 1"
+                },
+                new Song() {
+                    Title = "Title 2",
+                    Duration = 456,
+                    Lyrics = "Lyrics 2"
+                }
+            };
+
+            XmlSerializer xmlSerializer = new XmlSerializer(arr.GetType());
+
+            using (StringWriter textWriter = new StringWriter())
+            {
+                xmlSerializer.Serialize(textWriter, arr);
+                var result =  textWriter.ToString();
+            }
+        }
 
         private static void SysteIOUsageExample()
         {
