@@ -23,6 +23,7 @@ namespace Advence.Lesson_6
             //SericalizationExample();
             //XMLDocumentExample();
             XMLReaderExample();
+            //Practice3_Task1_XMLSerizlization();
             Console.ReadLine();
         } 
 
@@ -30,14 +31,19 @@ namespace Advence.Lesson_6
         {
             using (XmlReader reader = XmlReader.Create("XMLFile.xml"))
             {
+                Song song = null;
                 while (reader.Read())
-                {                    
+                {
                     if (reader.IsStartElement())
                     {
-                        var name = reader.Name;
-                        reader.Read();
-                        var value = reader.Value.Trim();
-                        Console.WriteLine($"{name}: {value}");
+                        if (reader.Name == "Song")
+                            song = new Song();
+
+                        if (reader.Name == "Title")
+                        {
+                            reader.Read();
+                            song.Title = reader.Value;
+                        }                           
                     }
                 }
             }
@@ -49,11 +55,14 @@ namespace Advence.Lesson_6
             xDoc.Load("XMLFile.xml");
           
             XmlElement arraysOfSong = xDoc.DocumentElement;
-            foreach (XmlNode song in arraysOfSong)
+            foreach (XmlNode songNode in arraysOfSong)
             {
-                foreach (XmlNode property in song.ChildNodes)
+                var song = new Song();
+                foreach (XmlNode property in songNode.ChildNodes)
                 {
-                    Console.WriteLine($"{property.Name}: {property.InnerText}");
+                    if (property.Name == "Title")
+                        song.Title = property.InnerText;
+                    //...
                 }
             }
         }
@@ -179,6 +188,35 @@ namespace Advence.Lesson_6
             var newDirectory = Directory.CreateDirectory("c://Program Files Copy");
             var firstFile = filesInfos.First();
             File.Copy(firstFile.FullName, $"{newDirectory.FullName}/{firstFile.Name}");
+        }
+
+        private static void Practice3_Task1_XMLSerizlization()
+        {
+            Song song = new Song()
+            {
+                Title = "Title 1",
+                Duration = 247,
+                Lyrics = "Lyrics 1"
+            };
+
+            string xml = null;
+
+            XmlSerializer serializer = new XmlSerializer(typeof(Song));
+            using (var textWriter = new StringWriter())
+            {
+                serializer.Serialize(textWriter, song);
+                xml = textWriter.ToString();                
+            }
+
+            Console.Write(xml);
+
+            Song deserizliedSong = null;
+            using (var xmlReader = new StringReader(xml))
+            {
+                deserizliedSong = serializer.Deserialize(xmlReader) as Song;
+            }
+
+            
         }
     }
 }

@@ -1,15 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Advence.Lesson_6
 {
+    //[Serializable]
     public class Song
     {
-        public string Title {get; set;}
-        public int Duration { get; set; }
-        public string Lyrics { get; set; }
+        public string Title;
+        public int Duration;
+
+       // [NonSerialized]
+        [XmlIgnore]
+        public string Lyrics;
     }
 }
