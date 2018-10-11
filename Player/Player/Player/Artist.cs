@@ -8,6 +8,15 @@ namespace Player
 {
     public class Artist
     {
+        public Artist()
+        {
+        }
+
+        public Artist(string name)
+        {
+            this.Name = name;
+        }
+
         public string Name { get; set; }
 
         public Song[] Songs { get; set; }

@@ -10,18 +10,14 @@ namespace Player
     {
         static void Main(string[] args)
         {
-            var artist = new Artist() { Name = "Loboda", Songs = new Song[3], Albums = new Album[1] };
-            var album = new Album() { Artist = artist, Title = "Superstar", Songs = new Song[3] };
-
-            var songs = CreateSongs(artist, album);
-
-            
-            artist.Albums[0] = album;
-            artist.Songs = new Song[3] { songs[0], songs[2], songs[4] };
-            album.Songs = new Song[3] { songs[1], songs[3], songs[4] };
-
-            var player = new PlayerInstance();
             Song currentPlayingSong = null;
+            Song[] songs = null;
+            Album album = null;
+            Artist artist = null;
+
+            CreatePlayerItems(out songs, out artist, out album);
+
+            var player = new PlayerInstance();            
 
             Console.WriteLine("-- Playing Songs --");
             player.Add(songs);            
@@ -39,6 +35,17 @@ namespace Player
  
         }
 
+        private static void CreatePlayerItems(out Song[] songs, out Artist artist, out Album album)
+        {
+            artist = new Artist() { Name = "Loboda", Songs = new Song[3], Albums = new Album[1] };
+            album = new Album() { Artist = artist, Title = "Superstar", Songs = new Song[3] };
+            songs = CreateSongs(artist, album);
+
+            artist.Albums[0] = album;
+
+            artist.Songs = new Song[3] { songs[0], songs[2], songs[4] };
+            album.Songs = new Song[3] { songs[1], songs[3], songs[4] };
+        }
 
         private static Song[] CreateSongs(Artist artist, Album album)
         {
