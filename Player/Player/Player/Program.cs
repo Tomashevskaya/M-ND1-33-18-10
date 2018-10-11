@@ -20,14 +20,20 @@ namespace Player
             var player = new PlayerInstance();            
 
             Console.WriteLine("-- Playing Songs --");
+            System.Threading.Thread.Sleep(3000);
             player.Add(songs);
             player.Play(out currentPlayingSong);
+
             Console.WriteLine("-- Suffle Songs --");
+            System.Threading.Thread.Sleep(3000);
             player.Shuffle();
             player.Play(out currentPlayingSong);
+
             Console.WriteLine("-- Sort Songs --");
+            System.Threading.Thread.Sleep(3000);
             player.SortByTitle();
             player.Play(out currentPlayingSong);
+
             /*
             Console.WriteLine("-- Playing Album --");
             player.Add(album);
@@ -43,14 +49,14 @@ namespace Player
 
         private static void CreatePlayerItems(out Song[] songs, out Artist artist, out Album album)
         {
-            artist = new Artist() { Name = "Loboda", Songs = new Song[3], Albums = new Album[1] };
-            album = new Album() { Artist = artist, Title = "Superstar", Songs = new Song[3] };
+            artist = new Artist() { Name = "Loboda", Songs = new List<Song>(), Albums = new Album[1] };
+            album = new Album() { Artist = artist, Title = "Superstar", Songs = new List<Song>() };
             songs = CreateSongs(artist, album);
 
             artist.Albums[0] = album;
 
-            artist.Songs = new Song[3] { songs[0], songs[2], songs[4] };
-            album.Songs = new Song[3] { songs[1], songs[3], songs[4] };
+            artist.Songs = new List<Song>() { songs[0], songs[2], songs[4] };
+            album.Songs = new List<Song>() { songs[1], songs[3], songs[4] };
         }
 
         private static Song[] CreateSongs(Artist artist, Album album)
@@ -58,40 +64,40 @@ namespace Player
             return new Song[] {
                 new Song()
                 {
-                    Title = "Superstar",
+                    Title = "Superstar(1)",
                     Duration = 300,
-                    Lyrics = @"1. Для тебя не осталось слов и мыслей хороших...",
+                    Lyrics = @"Для тебя не осталось слов и мыслей хороших...",
                     Album = album,
                     Artist = artist
                 },
                 new Song()
                 {
-                    Title = "Твои глаза",
+                    Title = "Твои глаза(5)",
                     Duration = 300,
-                    Lyrics = @"2. Твои глаза... останови планету...",
+                    Lyrics = @"Твои глаза... останови планету...",
                      Album = album,
                     Artist = artist
                 },
                 new Song()
                 {
-                    Title = "К черту любовь",
+                    Title = "К черту любовь(2)",
                     Duration = 300,
-                    Lyrics = @"3. А может к черту любовь... все понимаю но я опять влюбляюсь в тебя",
+                    Lyrics = @"А может к черту любовь... все понимаю но я опять влюбляюсь в тебя",
  Album = album,
                     Artist = artist
                 },
                 new Song()
                 {
-                    Title = "Парень",
+                    Title = "Парень(3)",
                     Duration = 300,
-                    Lyrics = @"4. Парень, ты меня так сильно ранил...",
+                    Lyrics = @"Парень, ты меня так сильно ранил...",
  Album = album,
                     Artist = artist
                 },
                 new Song()    {
-                    Title = "Случайная",
+                    Title = "Случайная(4)",
                     Duration = 300,
-                    Lyrics = @"5. Ты пишешь мне письма такие печальные...",
+                    Lyrics = @"Ты пишешь мне письма такие печальные...",
  Album = album,
                     Artist = artist
                 }
