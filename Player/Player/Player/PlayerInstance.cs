@@ -39,14 +39,9 @@ namespace Player
 
         public bool Play(out Song playingSong, bool loop = false)
         {
-            if (PlayingSong == null)
-            {
-                PlayingSong = Songs[0];
-            }
+            playingSong = PlayingSong = PlayingSong ?? Songs[0];
 
-            playingSong = PlayingSong;
-
-            if (Locked == false)
+            if (!Locked)
             {
                 Playing = true;
             }
@@ -59,8 +54,11 @@ namespace Player
                     foreach (var song in Songs)
                     {
                         PlayingSong = song;
+
+                        Console.Clear();                       
                         Console.WriteLine(PlayingSong.Title + ": " + PlayingSong.Lyrics);
-                        Console.WriteLine();
+
+                        System.Threading.Thread.Sleep(2000);
                     }
                 }
             }
