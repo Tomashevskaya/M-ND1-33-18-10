@@ -17,12 +17,35 @@ namespace Base.Lesson_5
             Add2("song 2", "song 3", "song 4");
             Add2("song 2");*/
 
-            ArrayListExample();
+            //ArrayListExample();
+            PoemExample();
 
             Console.ReadLine();
         }
 
+        public static void PoemExample()
+        {
+            Console.WriteLine("Введите четверостишье");
+            string[] poem = new string[4];
 
+            for (int i = 0; i < 4; i++)
+            {
+                Console.Write(i+1 + ". ");
+                poem[i] = Console.ReadLine();
+            }
+
+            for (int i = 0; i < poem.Length; i++)
+            {
+                var row = poem[i];
+
+                var result = row
+                    .Replace('о', 'а')
+                    .Replace("л", "ль")
+                    .Replace("ть", "т");
+
+                Console.WriteLine(result);
+            }
+        }
 
         public static void ArrayListExample()
         {
