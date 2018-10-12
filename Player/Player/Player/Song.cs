@@ -18,5 +18,19 @@
         public Artist Artist { get; set; }
 
         public Album Album { get; set; }
+
+        public bool? Like { get; set; }
+
+        //public System.Nullable<bool> Like { get; set; }
+
+        public void LikeSong()
+        {
+            Like = true;
+        }
+
+        public void DislikeSong()
+        {
+            Like = false;
+        }
     }
 }

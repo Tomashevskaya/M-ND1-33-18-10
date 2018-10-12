@@ -55,7 +55,9 @@ namespace Player
                     {
                         PlayingSong = song;
 
-                        Console.Clear();                       
+                        Console.Clear();
+
+                        ListSongs();
                         Console.WriteLine(PlayingSong.Title + ": " + PlayingSong.Lyrics);
 
                         System.Threading.Thread.Sleep(2000);
@@ -65,6 +67,72 @@ namespace Player
 
             return Playing;
         }
+
+        private void ListSongs()
+        {
+            foreach (var song in Songs)
+            {
+                var data = GetSongData(song);
+                var songInfo = $"{data.title} - {data.duration.min}:{data.duration.sec}";
+                if (data.isPlayingNow)
+                {
+                    songInfo = $"***{songInfo}***";
+                }
+
+                if (data.like.HasValue)
+                {
+                    if (data.like.Value)
+                    {
+                        Console.BackgroundColor = ConsoleColor.DarkGreen;
+                        Console.WriteLine(songInfo);
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.BackgroundColor = ConsoleColor.Magenta;
+                        Console.WriteLine(songInfo);
+                        Console.ResetColor();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine(songInfo);
+                }
+
+                 
+            }
+        }
+
+        private (string title, (int min, int sec) duration, bool isPlayingNow, bool? like) GetSongData(Song song)
+        {
+            var title = song.Title;
+            var isPlayingNow = song == PlayingSong;
+            var min = song.Duration / 60;
+            var sec = song.Duration % 60;
+            
+            return (title, (min, sec), isPlayingNow, song.Like);
+        }
+
+        /*private dynamic GetSongData(Song song)
+        {
+            var title = song.Title;
+            var isPlayingNow = song == PlayingSong;
+            var min = song.Duration / 60;
+            var sec = song.Duration % 60;
+
+            //return (title, (min, sec), isPlayingNow);
+
+            return new
+            {
+                title,
+                duration = new
+                {
+                    min,
+                    sec
+                },
+                isPlayingNow                
+            };
+        }*/
 
         public bool Stop(out Song playingSong)
         {

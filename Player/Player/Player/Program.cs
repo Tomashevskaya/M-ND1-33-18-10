@@ -17,6 +17,10 @@ namespace Player
 
             CreatePlayerItems(out songs, out artist, out album);
 
+            songs[0].Like = true;
+            songs[3].Like = false;
+            songs[4].Like = true;           
+
             var player = new PlayerInstance();            
 
             Console.WriteLine("-- Playing Songs --");
