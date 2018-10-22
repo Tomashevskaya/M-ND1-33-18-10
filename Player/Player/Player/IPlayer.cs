@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Player.Domain;
 
 namespace Player
@@ -11,10 +12,9 @@ namespace Player
         List<TPlayItem> Items { get; set; }
 
         void Add(params TPlayItem[] items);
-        (string title, (int hours, int minutes, int seconds) duration, bool playing, bool? like) GetItemData(TPlayItem item);
-        void ListItems();
+         
         bool Lock();
-        bool Play(out TPlayItem playingItem, bool loop = false);
+        Task<bool> Play(bool loop = false);
         void Shuffle();
         void SortByTitle();
         bool Stop(out TPlayItem playingItem);

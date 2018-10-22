@@ -28,21 +28,20 @@ namespace Player
             artist.Songs = new List<Song> { songs[0], songs[2], songs[4] };
             album.Songs = new List<Song> { songs[1], songs[3], songs[4] };
 
-            var funnyVisualizer = new FunnyVisualizer();
-            var staticVisualizer = new StaticVisualizer();
-
-            var player = new Player(staticVisualizer);
-            Song currentPlayingSong = null;
-
-            //Console.WriteLine("-- Playing Songs --");
+            var player = new Player();
+            var skin = new Skin();
             player.Add(songs.ToArray());
-            player.Play(out currentPlayingSong);
+
+            var visualizer = new Visualizer(player, skin);
+            player.Play(false);
+            //Console.WriteLine("-- Playing Songs --");
+
             //Console.WriteLine("-- Suffle Songs --");
-            player.Shuffle();
-            player.Play(out currentPlayingSong);
+            //player.Shuffle();
+            //player.Play();
             //Console.WriteLine("-- Sort Songs --");
-            player.SortByTitle();
-            player.Play(out currentPlayingSong);
+            //player.SortByTitle();
+            //player.Play();
             /*
             Console.WriteLine("-- Playing Album --");
             player.Add(album);
