@@ -6,7 +6,7 @@ namespace ConsoleApp7
     {
         static void Main(string[] args)
         {
-            string name = "Olga";
+            string name = "Olga" ;
             char sex = 'М';
             bool hasFree2Pages = false;
             decimal visaPrice = 60;
