@@ -85,18 +85,17 @@ namespace Player
                             ?? fileMetadata.Name,
 
                         Duration = (int)
-                            (fileMetadata.Properties.System.Media.Duration?.Value / 10_000_000
-                            ?? 0),
+                            (fileMetadata.Properties.System.Media.Duration?.Value ?? 0) / 10_000_000,
 
                         Album = new Album()
                         {
                             Title = fileMetadata.Properties.System.Music.AlbumTitle?.Value,
-                            Year = (int)(fileMetadata.Properties.System.Media.Year?.Value),
+                            Year = (int)(fileMetadata.Properties.System.Media.Year?.Value ?? 0),
                         },
 
                         Artist = new Artist()
                         {
-                            Name = fileMetadata.Properties.System.Music.Artist?.Value.FirstOrDefault()
+                            Name = fileMetadata.Properties.System.Music.Artist?.Value?.FirstOrDefault()
                         }
                     };
 
